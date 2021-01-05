@@ -1,0 +1,208 @@
+<!--main container begins-->
+<div class="mainContainer">
+    <!--header container begins-->
+    <div class="row marginRemove headerContainer" #headerContainer [ngClass]="{'hideFullHeight':hideTopContainer==1}">
+        <!--container for stroke-width begins-->
+        <div class="col-md-3 col-sm-6 col-xs-12 marginDiv form-group">
+            <div class="col-md-12 col-sm-12 col-xs-12 dropdown" dropdown [dropdownToggle]="true">
+                <button class="selectPencil activePencilWidth" dropdown-open> <img src="./../../images/linewidth.png" width="100%" height="45" /></button>
+                <ul class="dropPencil dropdown-menu">
+                    <li (click)="strokeWidthHandler(1)"> <img src="./../../images/h1.png" width="200" height="45" title="1px" /></li>
+                    <li (click)="strokeWidthHandler(5)"> <img src="./../../images/h2.png" width="200" height="45" title="5px" /></li>
+                    <li (click)="strokeWidthHandler(8)"> <img src="./../../images/h3.png" width="200" height="45" title="8px" /></li>
+                    <li (click)="strokeWidthHandler(12)"> <img src="./../../images/h4.png" width="200" height="45" title="12px" /></li>
+                    <li (click)="strokeWidthHandler(15)"> <img src="./../../images/h5.png" width="200" height="45" title="15px" /></li>
+                </ul>
+            </div>
+        </div>
+        <!--container for stroke-width ends-->
+
+        <!--container for fill color begins-->
+        <div class="col-md-3 col-sm-6 col-xs-12 marginDiv form-group">
+            <div class="col-md-3 col-sm-4 col-xs-4"><label>FILL COLOR</label></div>
+            <div class="col-md-9 col-sm-8 col-xs-8">
+                <ul class="colorPickerContainer">
+                    <li (click)="fillColorHandler(item.color)" *ngFor="let item of colorPicker">
+                        <div class="colorPicker" [ngStyle]="{'background-color':item.color}"></div>
+                    </li>
+                    <li>
+                        <input [colorPicker]="eventService.shapeColor" (colorPickerChange)="eventService.shapeColor=$event;fillColorHandler(eventService.shapeColor)"
+                            [value]="eventService.shapeColor" class="form-control editColor" (change)="fillColorHandler(eventService.shapeColor)"
+                            name="shapeColor" [(ngModel)]="eventService.shapeColor" [cpPosition]="'bottom'" [cpPositionOffset]="'50%'"
+                            [cpPositionRelativeToArrow]="true" required/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--container for fill color ends-->
+
+        <!--container for stroke color begins-->
+        <div class=" col-md-3 col-sm-6 col-xs-12 marginDiv form-group">
+            <div class="col-md-3 col-sm-4 col-xs-4"><label>STROKE COLOR</label></div>
+            <div class="col-md-9 col-sm-8 col-xs-8">
+                <ul class="colorPickerContainer">
+                    <li (click)="strokeColorHandler(item.color)" *ngFor="let item of colorPicker">
+                        <div class="colorPicker" [ngStyle]="{'background-color':item.color}"></div>
+                    </li>
+                    <li>
+                        <input [colorPicker]="eventService.strokeColor" (colorPickerChange)="eventService.strokeColor=$event;strokeColorHandler(eventService.strokeColor)"
+                            [value]="eventService.strokeColor" class="form-control editColor" name="strokeColor" [cpPosition]="'bottom'"
+                            [cpPositionOffset]="'50%'" [cpPositionRelativeToArrow]="true" [(ngModel)]="eventService.strokeColor"
+                            required/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--container for stroke color ends-->
+
+        <!--container for functionality on shapes begins-->
+        <div class="col-md-3 col-sm-6 col-xs-12 marginDiv form-group">
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <img class="eraserImage" (click)="eraserInitiated()" [ngClass]="{'disabled':!eraserActive}" src="./../../images/eraser.jpg"
+                    width="30" height="30" title="eraser" />
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <img class="flipImage eraserImage" (click)="flipHorizontal()" src="./../../images/flipHorizontal.jpg" width="30" height="30"
+                    title="Flip Horizontal" />
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <img class="flipImage eraserImage" (click)="flipVertical()" src="./../../images/flipVertical.jpg" width="30" height="30"
+                    title="Flip Vertical" />
+            </div>
+        </div>
+        <!--container for functionality on shapes ends-->
+    </div>
+    <!--header conatiner ends-->
+
+
+    <!--mid container begins-->
+    <div class="innerContainer row" [ngClass]="{'showFullHeight':hideTopContainer==1}">
+        <!--left bar begins-->
+        <div #shapeContainer class="shapeContainer1 col-md-1 col-sm-1 col-xs-2" [ngClass]="{'hideDiv':hideLeftContainer==1}">
+            <ul class="shapeContainerData">
+                <li>
+                    <div (click)="freeHandDraw()"><img src="./../../images/pencil.jpg" [ngClass]="{'activePencil':eventService.freeHandDraw}" width="20"
+                            height="20" title="click" /></div>
+                </li>
+                <li draggable [dragScope]="'shapeSelector'" *ngFor="let item of imageType" [dragData]="item.shapeType">
+                    <img src="{{item.shapeIcon}}" title="drag">
+                </li>
+            </ul>
+        </div>
+        <!--right bar container for svg begins-->
+        <div class="shapeContainer2 col-md-11 col-sm-11 col-xs-10" [ngClass]="{'showDiv':hideLeftContainer==1}" droppable [dropScope]="'shapeSelector'"
+            (onDrop)="onItemDrop($event)">
+            <div class="leftArrow">
+                <div class="inside"><img src="./../../images/inside.jpg" [ngClass]="{hide:hideLeftContainer==1}" (click)="hideImageContainer()"
+                        width="20" height="20" title="inside" /></div>
+                <div class="outside"><img src="./../../images/outside.jpg" [ngClass]="{hide:hideLeftContainer==0}" (click)="hideImageContainer()"
+                        width="20" height="20" title="outside" /></div>
+            </div>
+            <div class="upArrow">
+                <div class="upside"><img src="./../../images/upside.jpg" [ngClass]="{hide:hideTopContainer==1}" (click)="hideHeaderContainer()"
+                        width="20" height="20" title="upward" /></div>
+                <div class="downside"><img src="./../../images/downside.jpg" [ngClass]="{hide:hideTopContainer==0}" (click)="hideHeaderContainer()"
+                        width="20" height="20" title="downward" /></div>
+            </div>
+            <!--conatiner for ruler-grid-->
+            <div class="rulerContainer">
+                <svg xmlns='http://www.w3.org/2000/svg' height="100%" width="100%">
+                    <defs>
+                        <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path d="M 30 10 L 0 10 M 10 0 L 10 30" fill="none" stroke="gray" stroke-width="0.5" />
+                        </pattern>
+                        <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                            <rect width="100" height="100" fill="url(#smallGrid)" />
+                            <path d="M 110 10 L 0 10 M 10 0 L 10 110 " fill="none" stroke="gray" stroke-width="1" />
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                </svg>
+            </div>
+            <!--conatiner for ruler-grid ends-->
+
+            <div class="imageContainer">
+                <div #imageContainer class="droppableItem" [ngClass]="{'handDraw':eventService.freeHandDraw}">
+                    <!--conatiner for svg image -->
+                    <svg xmlns='http://www.w3.org/2000/svg' (click)="removeBorder()" id="svg" width="100%" height="100%" freeHandDrawing>
+                        <g (click)="editShape($event)" *ngFor="let designData of eventService.designData" (contextmenu)="openContextMenu($event,designData.shapeType)">
+                            <path vector-effect="non-scaling-stroke" class=" borderShow" [attr.d]="designData.designDataPath" [attr.stroke]="designData.strokeColor"
+                                [attr.stroke-width]="designData.strokeWidth" [attr.fill]="designData.fillColor" id="{{designData.id}}">
+                                <title class="showArea">{{designData.shapeAttribute}} {{designData.area | number : '1.0-0'}}</title>
+                            </path>
+                        </g>
+                        <!--editable shape container begins-->
+                        <g #editBorder>
+                            <rect eraserDraw [ngClass]="{'eraserStart':eventService.eraserStart}" vector-effect="non-scaling-stroke" dragElement class="draggable"
+                                [attr.x]="eventService.rectangleBoundaryLeft" [attr.y]="eventService.rectangleBoundaryTop" [attr.width]="eventService.rectangleBorderWidth"
+                                [attr.height]="eventService.rectangleBorderHeight" fill="transparent" id="borderEdit" stroke="blue"
+                                stroke-width="2" stroke-dasharray="5" (contextmenu)="openContextMenu($event,'rectangle')">
+                            </rect>
+                            <g #transformShape>
+                                <circle resizable class="editableBottomRight" [attr.cx]="eventService.circleX" [attr.cy]="eventService.circleY" [attr.stroke-width]="eventService.scaleCircleStrokeWidth"
+                                    [attr.r]="eventService.smallCircleRadius" stroke="transparent" fill="blue" />
+                            </g>
+                            <g #textContainerFirst>
+                                <text [attr.x]="eventService.heightTextX" [attr.y]="eventService.heightTextY" dx="-10" dy="20">{{eventService.rectangleWidth | number : '1.0-0'}}</text>
+                            </g>
+                            <g #textContainerSecond>
+                                <text [attr.x]="eventService.widthTextX" [attr.y]="eventService.widthTextY" dx="10" dy="5">{{eventService.rectangleHeight | number : '1.0-0'}}</text>
+                            </g>
+                            <g rotateElement #rotateShape class="rotateShape">
+                                <circle [attr.cx]="eventService.rotateCircleX" [attr.cy]="eventService.rotateCircleY" [attr.stroke-width]="eventService.rotateCircleStrokeWidth"
+                                    [attr.r]="eventService.smallCircleRadius" stroke="transparent" fill="blue" />
+                                <line [attr.x1]="eventService.rotateCircleX" [attr.y1]="eventService.rotateCircleY" [attr.x2]="eventService.rotateLineX"
+                                    [attr.y2]="eventService.rotateLineY" stroke-width="2" stroke="blue" />
+                            </g>
+                        </g>
+                        <!--editable shape container ends-->
+                    </svg>
+                    <!--conatiner for svg image ends-->
+
+
+                    <!--toaster container begins-->
+                    <div #toasterContainer class="getInfo" [ngClass]="{showToast:displayToast}" [ngStyle]="{'top':toastTop,'left':toastLeft}">
+                        <form id="myForm" #parameterForm="ngForm" name="myForm">
+                            <div *ngFor="let shapeParameter of shapeParameterType,let i=index " class="row marginDiv form-group">
+                                <div class="col-md-3"><label>{{shapeParameter | uppercase}}</label></div>
+                                <div class="col-md-9"><input type="number" class="form-control parameterInput" name="{{shapeParameter}}" required
+                                        [(ngModel)]="eventService.parameter[shapeParameter]" [autofocus]="i==0" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                                        min="1" /><span>-cm</span></div>
+                                <!--(keyup)="submitValueCheck()"-->
+                            </div>
+                            <div class="submitData btnDesign marginDiv">
+                                <button type="submit" class="btn btn-info" [disabled]="submitValueCheck()" (click)="submitData( parameterForm)">Submit</button>
+                                <button type="button" class="btn btn-info" (click)="cancelPopup()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!--toaster container ends-->
+
+                    <!--context menu container begins-->
+                    <div #contextMenu class="contextMenu" [ngClass]="{'showMenu':eventService.displayMenu}" [ngStyle]="{'top':menuTopPx,'left':menuLeftPx}">
+                        <ul>
+                            <li (click)="editableParameter()" [ngClass]="{'disabled':freeHandLine}">Edit</li>
+                            <li (click)="moveBack()" [ngClass]="{'disabled':eventService.designData.length<2}">Move Back</li>
+                            <li (click)="moveFront()" [ngClass]="{'disabled':eventService.designData.length<2}">Move Front</li>
+                            <li (click)="copyShape()" [ngClass]="{'disabled':stopCopy}">Copy</li>
+                            <li class="divider"></li>
+                            <li (click)="deleteShape()">Delete</li>
+                        </ul>
+                    </div>
+                    <!--context menu container ends-->
+                </div>
+            </div>
+        </div>
+        <!--right bar container for svg ends-->
+    </div>
+    <!--mid container ends-->
+
+    <!--footer container starts-->
+    <div class="buttonContainer">
+        <button class="btn btn-info" (mousedown)="removeBorder()" (click)="saveImage()" [disabled]="eventService.designData.length<=0">Save</button>
+        <!--<button class="btn btn-info" (click)="undoContainer()" [disabled]="eventService.undoDataContainer.length<=0">Undo</button>-->
+        <button class="btn btn-info" (click)="clearContainer()" [disabled]="eventService.designData.length<=0">Clear</button>
+    </div>
+    <!--footer container ends-->
+</div>
+<!--main container ends-->

@@ -1,0 +1,309 @@
+.mainContainer
+{
+    width: 99%;
+    height: 100%;
+    margin: auto;
+}
+.innerContainer
+{
+    width: 100%;
+    margin: auto;
+    height: 83%;
+    background-color:#fff;
+            -webkit-transition: height 2s; /* Safari */
+    transition: height 2s;
+}
+.headerContainer{
+                -webkit-transition: visibility 3s; /* Safari */
+    transition: visibility 3s;
+        -webkit-transition: height 2s; /* Safari */
+    transition: height 2s;
+}
+.shapeContainer1
+{
+    width: 10%;
+    height: 100%;
+    margin: 0px;
+    padding: 3px;
+    border: 1px solid black;
+    overflow: hidden;
+        -webkit-transition: width 2s; /* Safari */
+    transition: width 2s;
+}
+.shapeContainer2
+{
+    width: 90%;
+    height: 100%;
+    margin: 0px;
+    padding: 3px;
+    border: 1px solid black;
+    overflow: hidden;
+            -webkit-transition: visibility 3s; /* Safari */
+    transition: visibility 3s;
+        -webkit-transition: width 2s; /* Safari */
+    transition: width 2s;
+}
+.shapeContainerData
+{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+.shapeContainerData li{
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+.shapeContainerData i{
+    margin: 5px 10px;      
+}
+.shapeContainerData img{
+        width: 35px;
+        height: 35px;
+}
+.droppableItem
+{
+    width: 100%;
+    height: 100%;
+    min-width: 1200px;
+    min-height: 500px;
+}
+.rulerContainer
+{
+        position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.buttonContainer button
+{
+    float: right;
+    background-color: #13addb !important;
+    margin: 5px 0px 0px 15px;
+}
+.getInfo
+{
+    display: none;
+    position: absolute;
+    z-index: 100px;
+    background-color: #fff;
+        border-radius: 5px;
+    box-shadow: 5px 6px 7px #888888;
+}
+.contextMenu
+{
+        display: none;
+    position: absolute;
+    z-index: 100px;
+    background-color: #fff;
+  border: 1px solid lightgray;
+      box-shadow: 5px 6px 7px #888888;
+}
+.contextMenu ul{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    width: 100px;
+}
+.rotateShape
+{
+    cursor: move;
+}
+.contextMenu li{
+    padding: 10px;
+    padding-left: 18px;
+    cursor: pointer;
+}
+.showToast{
+    display: block;
+    /*transform: translate(-50%,-50%);*/
+    width: 350px;
+    background-color: #fff;
+}
+.showMenu{    display: block;
+    /*transform: translate(-50%,-50%);*/
+    width: 100px;
+    background-color: #fff;
+}
+.btnDesign
+{
+    color: #fff;
+    border-color: #418bca;
+}
+.imageContainer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+.btnDesign button{
+    float: right;
+    margin: 5px 15px;
+    background-color: #418bca;
+}
+.disabled {
+    /*cursor:not-allowed; */
+    pointer-events:none;
+    opacity:0.6;         
+}
+.marginDiv
+{
+    margin: 10px 0px;
+        text-align: center;
+        padding: 0px;
+}
+.toastHead
+{
+    background-color: #418bca;
+    color: #fff;
+}
+.dropPencil li{
+    cursor: pointer;
+}
+input.ng-invalid.ng-touched
+{
+  border-left:4px solid rgba(255, 0, 0, 0.59);
+}
+.draggable
+{
+    cursor: move;
+}
+.editableBottomRight
+{
+    cursor: nwse-resize;
+}
+.editableSide
+{
+    cursor: e-resize;
+}
+.editableHeight
+{
+    cursor: s-resize;
+}
+.marginRemove
+{
+    margin: 0px;
+}
+/*input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}*/
+.colorPickerContainer
+{
+    list-style-type: none;
+}
+.colorPicker{
+   width: 15px;
+   height: 15px;
+   border:1px solid black;
+}
+.colorPickerContainer li{
+    float: left;
+    margin: 2px;
+}
+.strokePicker
+{
+    width: 50%;
+}
+.strokePicker img{
+    width:50px;
+    height: 50px;
+}
+.handDraw{
+    cursor: url("./../../images/pencilPointer.png"),default;
+}
+.selectPencil
+{
+        background-color: transparent;
+    border: 0px;
+        opacity: 0.7;
+        text-align: center;
+}
+.activePencilWidth
+{
+    opacity: 1;
+}
+.dropPencil
+{
+    list-style-type: none;
+    min-width: 200px;
+    left: 65px;
+}
+.editColor
+{
+    width: 2px;
+    height: 15px;
+    cursor:default;
+    background: -webkit-linear-gradient(left, red, orange, yellow, green, blue, indigo, violet); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(left, red, orange, yellow, green, blue, indigo, violet); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(left, red, orange, yellow, green, blue, indigo, violet); /* For Fx 3.6 to 15 */
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); /* Standard syntax (must be last) */
+}
+.parameterInput
+{
+    width: 80%;
+    display: inline-block;
+}
+/*.svgClass
+{
+    min-width: 1200px;
+    min-height: 500px;
+}*/
+.showArea{
+    display: none;
+}
+.leftArrow
+{
+    position: absolute;
+    z-index: 100;
+    cursor: pointer;
+}
+.upArrow{
+     position: absolute;
+    z-index: 100;
+    right: 1%;
+    cursor: pointer;
+    float: right;
+}
+/*.hide
+{
+    display: none;
+}*/
+.hideDiv
+{
+       width: 0px;
+    visibility: hidden;
+}
+.showDiv
+{
+    width: 99%;
+}
+.divider
+{
+    padding: 0px !important;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.16);
+}
+.rotateShape{
+    cursor: url("./../../images/rotate.png"),default;
+}
+.activePencil{
+        box-shadow: 1px 1px 6px #888874;
+    border-radius: 5px;
+}
+.hideFullHeight
+{
+    height:0%;
+    width:0%;
+     visibility: hidden;
+}
+.showFullHeight{
+    height: 93%;
+}
+.eraserImage{
+    margin-top: 7px;
+}
+.eraserStart{
+    cursor: url("./../../images/eraserPointer.png"),default;
+}

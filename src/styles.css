@@ -1,0 +1,24 @@
+html{
+    height: 100%;
+      -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+body{
+    height:100%;
+    padding: 0px;
+    margin: 0px;
+}
+.color-picker
+{
+    left: 30px !important;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none !important;
+}

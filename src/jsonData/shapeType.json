@@ -1,0 +1,18 @@
+[
+    {
+        "shapeType": "circle",
+        "shapeIcon": "./../images/circle.png"
+    },
+    {
+        "shapeType": "rectangle",
+        "shapeIcon": "./../images/rectangle.png"
+    },
+    {
+        "shapeType": "triangle",
+        "shapeIcon": "./../images/triangle.jpg"
+    },
+    {
+        "shapeType": "line",
+        "shapeIcon": "./../images/aline.png"
+    }
+]

@@ -1,0 +1,29 @@
+[
+    {
+        "type": "circle",
+        "parameter": [
+            "radiusX",
+            "radiusY"
+        ]
+    },
+    {
+        "type": "line",
+        "parameter": [
+            "size"
+        ]
+    },
+    {
+        "type": "rectangle",
+        "parameter": [
+            "width",
+            "height"
+        ]
+    },
+    {
+        "type": "triangle",
+        "parameter": [
+            "base",
+            "height"
+        ]
+    }
+]
